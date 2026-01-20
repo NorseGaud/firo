@@ -710,6 +710,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Clean Guix build dirs
+        run: |
+          set -exo pipefail
+          ./contrib/guix/guix-clean || true
       - name: Download macOS SDK
         run: |
           set -exo pipefail
@@ -797,7 +801,6 @@ jobs:
       - name: Run Guix Build
         run: |
           set -exo pipefail
-          ./contrib/guix/guix-clean || true
           CORES=$(($(nproc) - 1 > 0 ? $(nproc) - 1 : 1))
           export SDK_PATH="$(pwd)/depends/SDKs"
           env HOSTS="${HOST}" \
@@ -856,6 +859,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Clean Guix build dirs
+        run: |
+          set -exo pipefail
+          ./contrib/guix/guix-clean || true
       - name: Download macOS SDK
         run: |
           set -exo pipefail
@@ -943,7 +950,6 @@ jobs:
       - name: Run Guix Build
         run: |
           set -exo pipefail
-          ./contrib/guix/guix-clean || true
           CORES=$(($(nproc) - 1 > 0 ? $(nproc) - 1 : 1))
           export SDK_PATH="$(pwd)/depends/SDKs"
           env HOSTS="${HOST}" \
